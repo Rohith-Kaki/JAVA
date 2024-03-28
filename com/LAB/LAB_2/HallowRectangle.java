@@ -2,6 +2,7 @@ package LAB.LAB_2;
 
 public class HallowRectangle {
     public static void main(String[] args) {
+        //no of rows and colomns
         int n = 4;
         int m = 4;
         for(int i = 0; i<n; i++){
