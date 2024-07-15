@@ -2,16 +2,22 @@ package DSA.LinkedList;
 
 public class linkList {
     Node head;
-    private int size;
+    Node tail;
+    private static int size;
     linkList(){
         size = 0;
     }
-    public class Node{
+    public static class Node{
         int data;
         Node next;
         Node(int data){
             this.data = data;
             this.next = null;
+            size++;
+        }
+        Node(int data, Node next){
+            this.data = data;
+            this.next = next;
             size++;
         }
     }
@@ -70,6 +76,17 @@ public class linkList {
         prev.next = null;
         return data;
     }
+    public void insertRecursion(int data, int index){
+        head = insertRecursion(data,index,head);
+    }
+    public Node insertRecursion(int data, int index, Node node){
+        if(index == 0){
+            Node newnode = new Node(data,node);
+            return newnode;
+        }
+        node.next = insertRecursion(data, index-1, node.next);
+        return node;
+    }
     public void display(){
         Node current = head;
         if(head == null){
@@ -85,17 +102,52 @@ public class linkList {
     public int getSize(){
         return size;
     }
+    public void duplicates(){
+        Node current = head;
+        while(current.next != null){
+            if(current.data == current.next.data){
+                current.next = current.next.next;
+                size--;
+            }else{
+                current = current.next;
+            }
+        }
+    }
+    public void tail(){
+        Node current = head;
+        while(current.next!=null){
+            current = current.next;
+        }
+        tail = current;
+    }
+    public void reversal(Node head){
+        Node current1 = head;
+        if(tail == current1){
+            head = current1;
+            return;
+        }
+        reversal(current1.next);
+        tail.next = current1;
+        tail = current1;
+        tail.next = null;
+    }
 
     public static void main(String[] args){
         linkList LL = new linkList();
-        LL.addFirst(0);
-        LL.addFirst(0);
-        LL.addFirst(0);
+       LL.addLast(1);
+       LL.addLast(2);
+       LL.addLast(2);
+       LL.addLast(3);
+       LL.addLast(4);
+       LL.addLast(4);
         LL.display();
-        LL.deleteEnd();
-        LL.deleteFirst();
+        System.out.println();
+        // LL.insertRecursion(44, 4);
+        LL.tail();
+        // LL.deleteEnd();
+        // LL.deleteFirst();
         System.out.println(LL.getSize());
-        // System.out.println(LL.deleteEnd());
-        LL.display();
+        // // System.out.println(LL.deleteEnd());
+        // LL.display();
     }
 }
