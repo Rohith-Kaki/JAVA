@@ -1,5 +1,3 @@
-package Leetcode.Easy;
-
 public class NoOfStepsToZero1342{
     public static void main(String[] args) {
         System.out.println(NoOfSteps(57));
